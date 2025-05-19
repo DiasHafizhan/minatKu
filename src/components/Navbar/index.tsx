@@ -1,0 +1,70 @@
+"use client";
+
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="w-full px-8 md:px-20 py-5 flex items-center justify-between text-white bg-[#0F1214] border-b border-b-[#efe8e8] relative">
+      <h1 className="text-2xl font-semibold">MinatKu</h1>
+      <ul className="hidden md:flex gap-7">
+        <li>
+          <Link href="/" className="">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">About</Link>
+        </li>
+      </ul>
+
+      <div className="flex items-center gap-3">
+        <div className="md:hidden">
+          {isOpen ? (
+            <X
+              onClick={() => setIsOpen(false)}
+              className="w-6 h-6 cursor-pointer"
+            />
+          ) : (
+            <Menu
+              onClick={() => setIsOpen(true)}
+              className="w-6 h-6 cursor-pointer"
+            />
+          )}
+        </div>
+        <Link href="/login" className="hidden md:block">Login</Link>
+
+        <div
+          className={`absolute left-0 w-full bg-[#515151] text-white shadow-md flex flex-col items-center space-y-4 py-4 z-50 pb-10 md:hidden transform transition-all duration-300 ease-in-out ${
+            isOpen
+              ? "top-full translate-y-0 opacity-100"
+              : "top-full -translate-y-5 opacity-0 pointer-events-none"
+          }`}
+        >
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className="text-white font-semibold"
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setIsOpen(false)}
+            className="text-white font-semibold"
+          >
+            About
+          </Link>
+          <div className="mt-10">
+            <Link href="/login" className="bg-[#181C14] text-white font-semibold py-3 px-24 rounded-xl">
+              Login
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
