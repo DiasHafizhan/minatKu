@@ -21,8 +21,8 @@ import { RIASECResult } from "@/lib/type"
 
 
 const chartConfig = {
-  jumlah: {
-    label: "Jumlah",
+  skor: {
+    label: "Skor",
   },
   realistic: {
     label: "Realistic",
@@ -51,7 +51,13 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function PieChartComponent({data}: {data: RIASECResult[]}) {
-const chartData = data.map((item, index) => ({kategori: item.nama_category.toLowerCase(), jumlah: item.skor, fill: `hsl(var(--chart-${(index % 5) + 1}` }));
+const chartData = data
+  .filter((item) => item.skor > 0)
+  .map((item) => ({
+    kategori: item.nama_category.toLowerCase(),
+    skor: item.skor,
+    fill: `var(--color-${item.nama_category.toLowerCase()})`,
+  }));
 
 console.log(chartData)
 
@@ -70,9 +76,9 @@ console.log(chartData)
         >
           <PieChart>
             <ChartTooltip
-              content={<ChartTooltipContent nameKey="jumlah" hideLabel />}
+              content={<ChartTooltipContent nameKey="skor" hideLabel />}
             />
-            <Pie data={chartData} dataKey="jumlah">
+            <Pie data={chartData} dataKey="skor">
               <LabelList
                 dataKey="kategori"
                 className="fill-background"
