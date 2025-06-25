@@ -2,10 +2,7 @@
 
 import { RIASECResult } from "@/lib/type";
 import axios from "axios";
-import Link from "next/link";
-import { CSSProperties, useEffect, useRef, useState } from "react";
-import { PieChartComponent } from "../Fragments/PieChart";
-import { ClipLoader } from "react-spinners";
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -15,30 +12,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useParams } from "next/navigation";
+import { PieChartComponent } from "@/components/Fragments/PieChart";
+import Link from "next/link";
+import { CategoryResultItems } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
 
-export default function HasilQuiz({ data }: { data: string[] }) {
-  const [hasil, setHasil] = useState<RIASECResult[]>([]);
+export default function HasilCategory() {
+  const params = useParams<{ categoryId: string }>();
   const [isLoading, setIsLoading] = useState(false);
-  const [idCategory, setIdCategory] = useState("");
-  const hasFetched = useRef(false);
+  const [hasil, setHasil] = useState<RIASECResult[] | undefined>(undefined);
 
   useEffect(() => {
-    if (hasFetched.current) return; // sudah jalan sebelumnya, skip
-    hasFetched.current = true;
     async function fetchRekomendation() {
-      setIsLoading(true);
+      setIsLoading(true)
       try {
-        const res = await axios.post("/api/analisa", { hasil: data });
-        console.log(res.data);
-        setHasil(res.data.hasil);
-        setIdCategory(res.data.categoryId);
+        const res = await axios.get<CategoryResultItems[]>(`/api/analisa/${params.categoryId}`);
+        setHasil(res.data.sort((a, b) => b.skor - a.skor));
       } catch (error) {
         console.log(error);
       } finally {
@@ -47,6 +38,10 @@ export default function HasilQuiz({ data }: { data: string[] }) {
     }
     fetchRekomendation();
   }, []);
+
+  if (hasil == undefined) {
+    return null;
+  }
 
   if (isLoading) {
     return (
@@ -111,7 +106,9 @@ export default function HasilQuiz({ data }: { data: string[] }) {
             className="mb-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] p-7 rounded-lg"
             key={index}
           >
-            <h1 className="mb-6">{value.nama_category}</h1>
+            <h1 className="mb-3 text-xl font-semibold">
+              {value.nama_category}
+            </h1>
             <p>{value.alasan_kecocokan}</p>
             <p>{value.deskripsi_category}</p>
             <p>{value.rekomendasi_mata_pelajaran.join(", ")}</p>
@@ -119,7 +116,7 @@ export default function HasilQuiz({ data }: { data: string[] }) {
         ))}
 
         <Link
-          href={`/ai/chatBot/${idCategory}`}
+          href={`/ai/chatBot/${params.categoryId}`}
           className="px-5 py-3 bg-[#096964] text-white transition duration-300 ease-in-out hover:bg-[#447f7c] text-center rounded-full"
         >
           Chat with MinatKu

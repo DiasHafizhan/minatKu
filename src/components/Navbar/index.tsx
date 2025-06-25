@@ -1,15 +1,16 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { BotMessageSquare, Menu, X } from "lucide-react";
+import { Session } from "next-auth";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Navbar() {
+export default function qqqNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { data: session } = useSession();
   return (
-    <div className="w-full px-8 md:px-20 py-5 flex items-center justify-between text-white bg-[#0F1214] border-b border-b-[#efe8e8] relative">
-      <h1 className="text-2xl font-semibold">MinatKu</h1>
+    <div className="w-full px-8 md:px-20 py-5 flex items-center justify-between text-[#141414] bg-[#ffffff] border-b border-b-[#efe8e8] relative">
       <ul className="hidden md:flex gap-7">
         <li>
           <Link href="/" className="">
@@ -20,6 +21,11 @@ export default function Navbar() {
           <Link href="/about">About</Link>
         </li>
       </ul>
+
+      <div className="flex items-center gap-3">
+        <BotMessageSquare />
+        <h1 className="text-2xl font-semibold">MinatKu</h1>
+      </div>
 
       <div className="flex items-center gap-3">
         <div className="md:hidden">
@@ -35,7 +41,31 @@ export default function Navbar() {
             />
           )}
         </div>
-        <Link href="/login" className="hidden md:block">Login</Link>
+        <div className="flex items-center gap-4">
+          {session ? (
+            <button
+              onClick={() => {
+                console.log("click");
+                signOut({ redirectTo: "/" });
+              }}
+              className="hidden md:block bg-[#141414] text-white py-2 px-5 rounded-lg"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link href="/login" className="hidden md:block">
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                className="hidden md:block bg-[#141414] text-white py-2 px-5 rounded-lg"
+              >
+                Sign Up free
+              </Link>
+            </>
+          )}
+        </div>
 
         <div
           className={`absolute left-0 w-full bg-[#515151] text-white shadow-md flex flex-col items-center space-y-4 py-4 z-50 pb-10 md:hidden transform transition-all duration-300 ease-in-out ${
@@ -59,7 +89,10 @@ export default function Navbar() {
             About
           </Link>
           <div className="mt-10">
-            <Link href="/login" className="bg-[#181C14] text-white font-semibold py-3 px-24 rounded-xl">
+            <Link
+              href="/login"
+              className="bg-[#181C14] text-white font-semibold py-3 px-24 rounded-xl"
+            >
               Login
             </Link>
           </div>

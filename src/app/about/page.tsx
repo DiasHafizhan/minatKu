@@ -1,86 +1,129 @@
-import { Bot, Code, Database } from "lucide-react";
+import CardHome from "@/components/Fragments/CardHome";
+import { ChartPie, Cpu, GraduationCap, Shapes } from "lucide-react";
 
 export default function About() {
   return (
-    <div className="px-8 md:px-20">
-      <p className="text-white font-semibold text-lg my-10">About Us</p>
-      <h2 className="text-white text-4xl font-semibold mb-14">Our Story</h2>
-
-      {/* section 1 */}
-      <div className="flex flex-wrap items-center">
-        <div className="pr-10 mb-8 w-full md:w-[492px]">
-          <img
-            src="https://plus.unsplash.com/premium_photo-1661779091139-7c8caf3d41ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHN0dWRlbnR8ZW58MHwwfDB8fHww"
-            className="w-full rounded-2xl"
-            alt=""
-          />
-        </div>
-        <div className="w-full md:max-w-[55%]">
-          <h1 className="text-2xl font-semibold text-white mb-8">
-            Menyatukan teknologi dan empati untuk membantu siswa memilih masa
-            depan yang tepat
-          </h1>
-          <p className="text-[#cac5c5]">
-            Kami menggabungkan kecerdasan buatan dan pemahaman mendalam tentang
-            pendidikan untuk menghadirkan solusi cerdas bagi siswa. Dengan
-            pendekatan berbasis data dan AI generatif, Minatku membantu
-            mengarahkan siswa pada pilihan mata pelajaran dan peminatan yang
-            paling sesuai dengan potensi dan minat mereka demi masa depan yang
-            lebih cerah dan terarah.
-          </p>
-        </div>
+    <div className="px-6 sm:px-10 md:px-20 mt-24">
+      <div className="text-center mb-16">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-5">
+          We’re Redefining How <span className="text-[#096964]">Students</span>{" "}
+          <br className="hidden sm:block" />
+          Discover Their Interests
+        </h1>
+        <p className="max-w-[90%] md:max-w-[700px] text-[#141414] text-base m-auto font-medium">
+          MinatKu helps students find the right subjects through smart,
+          personalized recommendations powered by AI and proven psychological
+          models.
+        </p>
       </div>
-      {/* section 1 */}
 
-      {/* section 2 */}
-      <div className="mt-28 flex flex-wrap items-center">
-        <div className="flex flex-col w-full md:w-[45%] ">
-          <h2 className="text-4xl font-semibold text-white mb-8">
-            Teknologi Kami
+      <img src="/about.png" alt="" className="w-full rounded-xl mb-24" />
+
+      <div className="my-24 sm:my-32 bg-[#BFDDFC]/50 p-6 sm:p-10 rounded-xl">
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-5xl font-bold mb-5">
+            Why Trust MinatKu
           </h2>
-          <p className="text-[#cac5c5] max-w-[85%]">
-            Dengan menjunjung tinggi inovasi, kolaborasi, dan keandalan, kami
-            membangun teknologi cerdas yang dirancang untuk memberikan
-            pengalaman belajar yang personal, relevan, dan bermakna bagi setiap
-            siswa.
+          <p className="max-w-[90%] md:max-w-[600px] text-[#141414] text-base m-auto font-medium">
+            We’re committed to guiding students through data-driven insights,
+            making subject selection smarter and more meaningful.
           </p>
         </div>
-        <div className="flex flex-wrap md:w-1/2 mt-8">
-          <div className="bg-[#1D232A] flex items-center rounded-2xl py-5 px-5 mb-3">
-            <Code className="text-white w-[100px]" />
-            <div className="text-white">
-              <h3 className="mb-2 text-xl font-semibold">Next.js</h3>
-              <p className="text-[#cac5c5]">
-                Framework web modern berbasis React yang cepat, efisien, dan
-                mendukung rendering server-side.
+
+        <div className="w-full mt-10 flex flex-wrap justify-center gap-6">
+          <CardHome
+            title="Backed by Science & AI"
+            desc="Uses the proven RIASEC model and Generative AI to provide accurate and personalized subject recommendations."
+          >
+            <Cpu className="w-32 sm:w-36 md:w-40" />
+          </CardHome>
+          <CardHome
+            title="Clear Visual Insights"
+            desc="Understand your results easily with interactive tables, charts, and percentages that highlight your strengths and interests."
+          >
+            <ChartPie className="w-32 sm:w-36 md:w-40" />
+          </CardHome>
+          <CardHome
+            title="Built for Students"
+            desc="Designed to be simple, friendly, and easy to use — helping students make smarter, more confident learning decisions."
+          >
+            <GraduationCap className="w-32 sm:w-36 md:w-40" />
+          </CardHome>
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-10 my-24 sm:my-32">
+        {/* LEFT TEXT */}
+        <div className="lg:w-1/2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5">
+            How MinatKu Works
+          </h2>
+          <p className="max-w-[100%] md:max-w-[450px] text-[#141414] text-base font-medium">
+            MinatKu helps you discover the right subjects through a simple
+            process — take a short quiz, chat with our AI assistant, and get
+            personalized learning recommendations based on your interests.
+          </p>
+        </div>
+
+        {/* RIGHT STEP LIST */}
+        <div className="flex flex-col gap-6">
+          {/* STEP 1 */}
+          <div className="flex items-start gap-4">
+            <div className="flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#096964] flex items-center justify-center text-white z-10">
+                1
+              </div>
+              <div className="h-12 w-[2px] bg-[#096964]"></div>
+            </div>
+            <div>
+              <h4 className="text-lg sm:text-xl font-bold mb-2">
+                Log In to Your Account
+              </h4>
+              <p className="text-sm max-w-[500px]">
+                Create or log in to your MinatKu account to start your
+                personalized journey.
               </p>
             </div>
           </div>
-          <div className="bg-[#1D232A] flex items-center rounded-2xl py-5 px-5 mb-3">
-            <Bot className="text-white w-[100px]" />
-            <div className="text-white">
-              <h3 className="mb-2 text-xl font-semibold">AI Generatif</h3>
-              <p className="text-[#cac5c5]">
-                Teknologi kecerdasan buatan yang menghasilkan rekomendasi
-                personal berdasarkan pola dan data pengguna.
+
+          {/* STEP 2 */}
+          <div className="flex items-start gap-4">
+            <div className="flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#096964] flex items-center justify-center text-white z-10">
+                2
+              </div>
+              <div className="h-12 w-[2px] bg-[#096964]"></div>
+            </div>
+            <div>
+              <h4 className="text-lg sm:text-xl font-bold mb-2">
+                Take the RIASEC Quiz
+              </h4>
+              <p className="text-sm max-w-[500px]">
+                Answer a short set of questions to explore your interests and
+                potential subject matches.
               </p>
             </div>
           </div>
-          <div className="bg-[#1D232A] flex items-center rounded-2xl py-5 px-5 mb-3">
-            <Database className="text-white w-[100px]" />
-            <div className="text-white">
-              <h3 className="mb-2 text-xl font-semibold">
-                Rekomendasi Berbasis Data
-              </h3>
-              <p className="text-[#cac5c5]">
-                Sistem analitik yang memberikan saran mata pelajaran berdasarkan
-                data nilai, minat, dan preferensi siswa.
+
+          {/* STEP 3 */}
+          <div className="flex items-start gap-4">
+            <div className="flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-[#096964] flex items-center justify-center text-white z-10">
+                3
+              </div>
+            </div>
+            <div>
+              <h4 className="text-lg sm:text-xl font-bold mb-2">
+                See Your Results & Get Recommendations
+              </h4>
+              <p className="text-sm max-w-[500px]">
+                See your scores with visual insights and consult with our AI to
+                get personalized recommendations.
               </p>
             </div>
           </div>
         </div>
       </div>
-      {/* section 2 */}
     </div>
   );
 }
