@@ -3,7 +3,7 @@ import CardHome from "@/components/Fragments/CardHome";
 import Link from "next/link";
 
 export default async function RulePage() {
-   const session = await auth()
+  const session = await auth();
   return (
     <div className="px-8 md:px-20 my-24">
       <h1 className="text-5xl text-center font-bold mb-4">
@@ -34,7 +34,7 @@ export default async function RulePage() {
       </div>
       <div className="flex justify-center items-center">
         <Link
-          href={session?`/ai/quiz` : `/login`}
+          href={session ? `/ai/quiz` : `/login`}
           className="px-14 py-5 bg-[#141414] text-white rounded-lg transition duration-300 ease-in-out hover:bg-[#262626]"
         >
           Explore My Potential

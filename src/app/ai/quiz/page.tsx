@@ -1,69 +1,183 @@
 "use client";
 
 import HasilQuiz from "@/components/Layouts/Result.Layout";
+import { Statement } from "@/types/type";
 import { useState } from "react";
 
-const quizData = [
-  { question: "Aku suka bongkar pasang barang elektronik atau motor" },
+const quizData: Statement[] = [
+  {
+    question: "Aku suka bongkar pasang barang elektronik atau motor",
+    type: "Realistic",
+    answer: false,
+  },
   {
     question:
       "Aku senang ikut bantu saat ada kegiatan kerja bakti atau bersih-bersih",
+    type: "Realistic",
+    answer: false,
   },
-  { question: "Aku lebih suka praktek langsung daripada belajar dari buku" },
+  {
+    question: "Aku lebih suka praktek langsung daripada belajar dari buku",
+    type: "Realistic",
+    answer: false,
+  },
   {
     question:
       "Aku suka kegiatan seperti berkebun, beternak, atau memelihara tanaman",
+    type: "Realistic",
+    answer: false,
   },
-  { question: "Aku tertarik dengan hal-hal berbau teknik atau permesinan" },
-
+  {
+    question: "Aku tertarik dengan hal-hal berbau teknik atau permesinan",
+    type: "Realistic",
+    answer: false,
+  },
   {
     question: "Aku suka cari tahu kenapa sesuatu bisa terjadi, kayak detektif",
+    type: "Investigative",
+    answer: false,
   },
-  { question: "Aku suka nonton video eksperimen atau sains di YouTube" },
-  { question: "Aku betah ngerjain soal matematika atau logika yang menantang" },
-  { question: "Aku pernah googling sesuatu hanya karena penasaran banget" },
+  {
+    question: "Aku suka nonton video eksperimen atau sains di YouTube",
+    type: "Investigative",
+    answer: false,
+  },
+  {
+    question: "Aku betah ngerjain soal matematika atau logika yang menantang",
+    type: "Investigative",
+    answer: false,
+  },
+  {
+    question: "Aku pernah googling sesuatu hanya karena penasaran banget",
+    type: "Investigative",
+    answer: false,
+  },
   {
     question:
       "Aku lebih suka tugas yang butuh mikir daripada kerja kelompok ramai-ramai",
+    type: "Investigative",
+    answer: false,
   },
-
-  { question: "Aku suka bikin doodle, gambar, atau desain di waktu luang" },
-  { question: "Aku pernah nulis puisi, cerita, atau lirik lagu sendiri" },
-  { question: "Aku suka banget ngedit foto, video, atau bikin konten" },
-  { question: "Aku lebih suka tugas kreatif daripada tugas hitungan" },
-  { question: "Aku ngerasa punya cara berpikir yang beda dari orang lain" },
-
-  { question: "Aku suka bantu temanku yang kesulitan ngerjain tugas" },
-  { question: "Aku senang ngobrol dan dengerin curhat orang" },
-  { question: "Aku aktif ikut organisasi atau kegiatan sosial di sekolah" },
-  { question: "Aku senang ngajarin teman sampai dia ngerti" },
-  { question: "Aku suka jadi tempat curhat atau tempat tanya" },
-
-  { question: "Aku suka jadi ketua kelompok atau ngatur jalannya diskusi" },
-  { question: "Aku tertarik buka bisnis sendiri suatu hari nanti" },
-  { question: "Aku pernah bikin ide acara atau kegiatan di sekolah" },
+  {
+    question: "Aku suka bikin doodle, gambar, atau desain di waktu luang",
+    type: "Artistic",
+    answer: false,
+  },
+  {
+    question: "Aku pernah nulis puisi, cerita, atau lirik lagu sendiri",
+    type: "Artistic",
+    answer: false,
+  },
+  {
+    question: "Aku suka banget ngedit foto, video, atau bikin konten",
+    type: "Artistic",
+    answer: false,
+  },
+  {
+    question: "Aku lebih suka tugas kreatif daripada tugas hitungan",
+    type: "Artistic",
+    answer: false,
+  },
+  {
+    question: "Aku ngerasa punya cara berpikir yang beda dari orang lain",
+    type: "Artistic",
+    answer: false,
+  },
+  {
+    question: "Aku suka bantu temanku yang kesulitan ngerjain tugas",
+    type: "Social",
+    answer: false,
+  },
+  {
+    question: "Aku senang ngobrol dan dengerin curhat orang",
+    type: "Social",
+    answer: false,
+  },
+  {
+    question: "Aku aktif ikut organisasi atau kegiatan sosial di sekolah",
+    type: "Social",
+    answer: false,
+  },
+  {
+    question: "Aku senang ngajarin teman sampai dia ngerti",
+    type: "Social",
+    answer: false,
+  },
+  {
+    question: "Aku suka jadi tempat curhat atau tempat tanya",
+    type: "Social",
+    answer: false,
+  },
+  {
+    question: "Aku suka jadi ketua kelompok atau ngatur jalannya diskusi",
+    type: "Enterprising",
+    answer: false,
+  },
+  {
+    question: "Aku tertarik buka bisnis sendiri suatu hari nanti",
+    type: "Enterprising",
+    answer: false,
+  },
+  {
+    question: "Aku pernah bikin ide acara atau kegiatan di sekolah",
+    type: "Enterprising",
+    answer: false,
+  },
   {
     question:
       "Aku suka ikut lomba debat, presentasi, atau yang butuh tampil percaya diri",
+    type: "Enterprising",
+    answer: false,
   },
-  { question: "Aku suka ngajak orang ikut ide atau proyek yang aku buat" },
-
-  { question: "Aku suka menyusun jadwal belajarku sendiri" },
-  { question: "Aku suka mencatat pelajaran dengan rapi dan lengkap" },
-  { question: "Aku nyaman dengan pekerjaan yang punya aturan jelas" },
-  { question: "Aku teliti banget kalau ngerjain soal atau tugas" },
-  { question: "Aku suka ngatur data, file, atau dokumen biar rapi" },
+  {
+    question: "Aku suka ngajak orang ikut ide atau proyek yang aku buat",
+    type: "Enterprising",
+    answer: false,
+  },
+  {
+    question: "Aku suka menyusun jadwal belajarku sendiri",
+    type: "Conventional",
+    answer: false,
+  },
+  {
+    question: "Aku suka mencatat pelajaran dengan rapi dan lengkap",
+    type: "Conventional",
+    answer: false,
+  },
+  {
+    question: "Aku nyaman dengan pekerjaan yang punya aturan jelas",
+    type: "Conventional",
+    answer: false,
+  },
+  {
+    question: "Aku teliti banget kalau ngerjain soal atau tugas",
+    type: "Conventional",
+    answer: false,
+  },
+  {
+    question: "Aku suka ngatur data, file, atau dokumen biar rapi",
+    type: "Conventional",
+    answer: false,
+  },
 ];
 
 export default function QuizPage() {
   const [current, setCurrent] = useState(0);
   const [answered, setAnswered] = useState(false);
-  const [hasil, setHasil] = useState<string[]>([]);
+  const [hasil, setHasil] = useState<Statement[]>([]);
 
-  const handleAnswer = (answer: any) => {
-    console.log(`Jawaban untuk soal ${current + 1}:`, answer);
+  const handleAnswer = (jawaban: string) => {
     setAnswered(true);
-    setHasil((prev) => [...prev, `${quizData[current].question} ${answer}`]);
+
+    setHasil((prev) => [
+      ...prev,
+      {
+        question: quizData[current].question,
+        type: quizData[current].type,
+        answer: jawaban === "Ya" ? true : false,
+      },
+    ]);
+
     setTimeout(() => {
       setCurrent((prev) => prev + 1);
       setAnswered(false);

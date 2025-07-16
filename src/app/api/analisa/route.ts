@@ -9,39 +9,36 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     const session = await auth()
-    const { hasil } = data as { hasil: string[] };
+    const { hasil } = data as { hasil: Record<string, number> };
+    const jsonHasil = JSON.stringify(hasil);
     const chat = await together.chat.completions.create({
       messages: [
         {
           role: 'system',
-          content: `You are a helpful career expert that ONLY responds in JSON. Your job is to recommend the most suitable high school specialization (peminatan) for Indonesian SMA students based on quiz results: ${hasil.join(' ')}.`
+          content: `You are a helpful career expert that ONLY responds in JSON. Your job is to recommend the most suitable high school specialization (peminatan) for Indonesian SMA students.`
         }
         ,
         {
           role: 'user',
           content: `
-            Anda membantu seseorang yang mengikuti tes RIASEC. Data input berupa variabel hasil bertipe []string, di mana setiap elemen berisi format soal dan jawaban "Ya" atau "Tidak", misal:
-          [
-            "Saya suka bekerja dengan kendaraan? Ya",
-            "Saya suka mengerjakan teka-teki ? Tidak",
-            ...
-          ]
+          Anda membantu seseorang yang mengikuti tes RIASEC. Data input diberikan dalam bentuk objek JavaScript yang berisi skor akhir dari masing-masing dimensi RIASEC
+
+          Berikut data input variabel hasil yang digunakan:  
+          hasil = ${jsonHasil}
+         
           Tugas Anda:
-          1. Setiap soal terkait dengan salah satu dari 6 kategori RIASEC berikut:
+          1. Gunakan nilai dari setiap kategori pada variabel hasil apa adanya tanpa mengubah nilai apapun.
+          2. Setiap setiap data input memiliki skor terkait dengan salah satu dari 6 kategori RIASEC berikut:
             - Realistic: suka bekerja dengan benda nyata dan kegiatan praktis.
             - Investigative: suka menganalisis dan memecahkan masalah secara logis.
             - Artistic: kreatif dan ekspresif dalam karya seni dan inovasi.
             - Social: suka membantu dan berinteraksi dengan orang lain.
             - Enterprising: senang memimpin, berwirausaha, dan meyakinkan orang lain.
-            - Conventional: menyukai keteraturan, administrasi, dan pekerjaan detail.
-          2. Hitung skor setiap kategori berdasarkan jawaban:
-            - Jawaban "Ya" untuk soal yang terkait kategori tertentu = +10 poin ke kategori tersebut.
-            - Jawaban "Tidak" = 0 poin.
-            - Jika ada soal yang tidak dikenali, abaikan.
-          3. Setelah skor untuk tiap kategori dihitung, buat output dalam format JSON berupa array, di mana setiap elemen memiliki atribut:
+            - Conventional: menyukai keteraturan, administrasi, dan pekerjaan detail
+          3.  Buat output dalam format JSON berupa array, di mana setiap elemen memiliki atribut:
             - nama_category: nama tipe RIASEC (Realistic, Investigative, Artistic, Social, Enterprising, Conventional)
             - deskripsi_category: Buatlah penjelasan mendetail mengenai untuk tipe tersebut. Gunakan referensi dari deskripsi di poin 1, namun kembangkan menjadi minimal dua paragraf. Harus menjelaskan gambaran umum tipe tersebut, termasuk karakteristik utamanya, latar belakang, atau konteks penggunaannya. 
-            - skor: skor kategori tersebut (angka dari 0 sampai maksimal sesuai perhitungan)
+            - skor: Gunakan nilai skor dari objek hasil secara langsung. Ambil nilai setiap kategori apa adanya, dan jangan menampilkan hasil.KATEGORI dalam output, tetapi tampilkan nilainya langsung (misalnya 100, bukan hasil.Realistic).
             - alasan_kecocokan: Buatlah penjelasan mendalam untuk alasan_kecocokan berdasarkan skor yang diperoleh pada kategori tertentu. Gunakan kriteria berikut:
                 Skor tinggi (≥ 70): sangat cocok, menunjukkan minat dan bakat kuat.
                 Skor sedang (40–69): cukup cocok, ada ketertarikan sedang.
@@ -56,35 +53,37 @@ export async function POST(request: NextRequest) {
               * Conventional: ["Ekonomi", "Sosiologi"]
           4. Urutkan array JSON dari skor tertinggi ke skor terendah.
           5. Gunakan bahasa Indonesia yang ringkas dan profesional.
-          Contoh output JSON:
-          [
+
+       
+          Catatan penting:
+            - Jangan ubah atau menyimpulkan skor sendiri.
+            - Skor hanya boleh diambil langsung dari variabel hasil.
+           
+          Contoh Format JSON:
+           [
             {
-              "nama_category": "Investigative",
-              "deskripsi_category": "Suka menganalisis dan memecahkan masalah secara logis.",
-              "skor": 80,
-              "alasan_kecocokan": "Skor tinggi menunjukkan Anda sangat tertarik pada kegiatan riset dan pemecahan masalah.",
-              "rekomendasi_mata_pelajaran": ["Biologi", "Fisika", "Kimia"]
-            },
+              "nama_category": string,
+              "deskripsi_category": string,
+              "skor": number,
+              "alasan_kecocokan": string,
+              "rekomendasi_mata_pelajaran": string[]
+          },
           {
-              "nama_category": "Artistic",
-              "deskripsi_category": "Kreatif dan ekspresif dalam karya seni dan inovasi.",
-              "skor": 60,
-              "alasan_kecocokan": "Skor sedang menandakan ketertarikan cukup pada bidang kreativitas.",
-              "rekomendasi_mata_pelajaran": ["Sosiologi", "Geografi"]
-            },
+              "nama_category": string,
+              "deskripsi_category": string,
+              "skor": number,
+              "alasan_kecocokan": string,
+              "rekomendasi_mata_pelajaran": string[]
+          },
             ...
           ]
-          ---
-          Berikut data hasil yang harus Anda proses:  
-          ${hasil}
-          ---
-          Berikan hasil dalam format JSON valid. Jangan beri teks pembuka atau penjelasan apa pun. Langsung mulai dari tanda kurung kurawal pembuka dan akhiri dengan kurung kurawal penutup.
+          Berikan hasil hanya dalam format JSON valid. Jangan beri teks pembuka atau penjelasan apa pun. Langsung mulai dari tanda kurung kurawal pembuka dan akhiri dengan kurung kurawal penutup.
 
           `
         }
       ],
       model: 'meta-llama/Llama-3-70b-chat-hf'
-    })
+    })
     const rekomendasi = chat.choices[0].message.content
     const hasilRiasec: RIASECResult[] = JSON.parse(rekomendasi!)
     console.log(hasilRiasec)

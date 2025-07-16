@@ -87,7 +87,7 @@ export default function Home() {
               <input
                 type="text"
                 className="flex-grow bg-transparent text-black placeholder-gray-400 focus:outline-none"
-                placeholder="Tulis sesuatu..."
+                placeholder="Let’s explore your future..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}

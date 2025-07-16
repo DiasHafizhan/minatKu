@@ -24,7 +24,7 @@ export function RegisterForm({
     email: "",
     password: "",
   });
-  const router = useRouter()
+  const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,7 +36,7 @@ export function RegisterForm({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form)
+    console.log(form);
     try {
       const response = await axios.post("/api/register", {
         username: form.username,
@@ -54,9 +54,11 @@ export function RegisterForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
+          <CardTitle className="text-center text-xl">
+            Join the <span className="text-[#096964]">MinatKu</span> Journey
+          </CardTitle>
+          <CardDescription className="text-center">
+            Enter your email below to join MinatKu and explore your interests
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -104,17 +106,14 @@ export function RegisterForm({
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full">
-                  Login
-                </Button>
-                <Button variant="outline" className="w-full">
-                  Login with Google
+                  Sign Up
                 </Button>
               </div>
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
+              <a href="/login" className="underline underline-offset-4">
+                Sign in
               </a>
             </div>
           </form>
