@@ -113,6 +113,7 @@ export default function Home() {
             </div>
             <div className="w-full lg:w-[50%] flex justify-center items-center">
               <Image
+                unoptimized
                 width={100}
                 height={100}
                 src="/tablePersentase.png"
@@ -136,6 +137,7 @@ export default function Home() {
             </div>
             <div className="w-full lg:w-[50%] flex justify-center items-center">
               <Image
+                unoptimized
                 width={100}
                 height={100}
                 src="/persentasePie.png"

@@ -18,7 +18,7 @@ export default function About() {
         </p>
       </div>
 
-      <Image width={100} height={100} src="/about.png" alt="" className="w-full rounded-xl mb-24" />
+      <Image unoptimized width={100} height={100} src="/about.png" alt="" className="w-full rounded-xl mb-24" />
 
       <div className="my-24 sm:my-32 bg-[#BFDDFC]/50 p-6 sm:p-10 rounded-xl">
         <div className="text-center">

@@ -13,7 +13,7 @@ export default function HeroSection() {
         </p>
       </div>
       <div className="w-1/2 flex justify-center items-center">
-        <Image width={100} height={100} src="/tablePersentase.png" alt="Tabel Persentase" className="w-[400px]" />
+        <Image unoptimized width={100} height={100} src="/tablePersentase.png" alt="Tabel Persentase" className="w-[400px]" />
       </div>
     </div>
   );
