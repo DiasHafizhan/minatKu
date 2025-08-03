@@ -12,6 +12,7 @@ import {
   Terminal,
   Wrench,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -111,7 +112,9 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full lg:w-[50%] flex justify-center items-center">
-              <img
+              <Image
+                width={100}
+                height={100}
                 src="/tablePersentase.png"
                 alt="Tabel Persentase"
                 className="w-full max-w-xs sm:max-w-md md:max-w-lg"
@@ -132,7 +135,9 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full lg:w-[50%] flex justify-center items-center">
-              <img
+              <Image
+                width={100}
+                height={100}
                 src="/persentasePie.png"
                 alt="Tabel Persentase"
                 className="w-full max-w-xs sm:max-w-md md:max-w-lg"

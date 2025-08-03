@@ -1,4 +1,4 @@
-export default function CardAi(props: any) {
+export default function CardAi(props: {number: string, title: string, desc: string}) {
   const {number, title, desc} = props
   return (
     <div className="w-full md:w-1/4 mb-8">

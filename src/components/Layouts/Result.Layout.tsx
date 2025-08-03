@@ -3,13 +3,11 @@
 import { RIASECResult } from "@/lib/type";
 import axios from "axios";
 import Link from "next/link";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PieChartComponent } from "../Fragments/PieChart";
-import { ClipLoader } from "react-spinners";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -19,12 +17,6 @@ import { Loader2 } from "lucide-react";
 import { Statement } from "@/types/type";
 import { riasec } from "@/lib/utils";
 import { useReactToPrint } from "react-to-print";
-
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
 
 export default function HasilQuiz({ data }: { data: Statement[] }) {
   const [hasil, setHasil] = useState<RIASECResult[]>([]);
@@ -52,7 +44,7 @@ export default function HasilQuiz({ data }: { data: Statement[] }) {
       }
     }
     fetchRekomendation();
-  }, []);
+  }, [data]);
 
   if (isLoading) {
     return (

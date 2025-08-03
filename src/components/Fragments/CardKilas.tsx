@@ -1,4 +1,6 @@
-export default function CardKilas(props: any) {
+import { ReactNode } from "react";
+
+export default function CardKilas(props: {title: string, children: ReactNode}) {
   const { title, children } = props;
 
   return (

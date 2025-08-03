@@ -1,4 +1,6 @@
-export default function TesLayout(props: any) {
+import { ReactNode } from "react";
+
+export default function TesLayout(props: {title: string, desc: string, subTitle: string, children: ReactNode}) {
   const { title, desc, subTitle, children } = props;
   return (
     <div className="flex flex-wrap mb-28">

@@ -1,12 +1,11 @@
 "use client";
 
 import { BotMessageSquare, Menu, X } from "lucide-react";
-import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function qqqNavbar() {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
   return (

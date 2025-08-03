@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function riasec(data: Statement[]) {
-  let result = { Realistic: 0, Investigative: 0, Artistic: 0, Social: 0, Enterprising: 0, Conventional: 0 };
+  const result = { Realistic: 0, Investigative: 0, Artistic: 0, Social: 0, Enterprising: 0, Conventional: 0 };
  
   data.forEach((item) => {
     if (item.answer === true) {
@@ -30,7 +30,7 @@ export function riasec(data: Statement[]) {
 
   const total = 5;
   type PersonalityType = keyof typeof result;
-  let percentage: { [key: string]: number } = {};
+  const percentage: { [key: string]: number } = {};
 
   (Object.keys(result) as PersonalityType[]).forEach(type => {
     percentage[type] = (result[type] / total) * 100;

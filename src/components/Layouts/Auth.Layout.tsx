@@ -1,7 +1,8 @@
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { ReactNode } from "react";
 
-export default function AuthLayout(props: any) {
+export default function AuthLayout(props: {title: string, type: string, children: ReactNode}) {
   const { title, type, children } = props;
   return (
     <div className="text-white flex justify-center items-center h-screen px-8">

@@ -3,15 +3,7 @@
 import { RIASECResult } from "@/lib/type";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow,} from "@/components/ui/table";
 import { useParams } from "next/navigation";
 import { PieChartComponent } from "@/components/Fragments/PieChart";
 import Link from "next/link";
@@ -42,7 +34,7 @@ export default function HasilCategory() {
       }
     }
     fetchRekomendation();
-  }, []);
+  }, [params.categoryId]);
 
   if (hasil == undefined) {
     return null;

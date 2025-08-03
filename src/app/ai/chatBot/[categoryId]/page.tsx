@@ -6,13 +6,12 @@ import { useParams } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
-  const params = useParams<{ categoryId: string }>()
+  const params = useParams<{ categoryId: string }>();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>(
     []
   );
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -22,8 +21,7 @@ export default function Home() {
     if (!input.trim()) return;
 
     try {
-      
-     const newUserMessage = { role: "user", content: input };
+      const newUserMessage = { role: "user", content: input };
 
       // 1. Tambahkan pesan user ke messages
       setMessages((prevMessages) => {
@@ -36,7 +34,7 @@ export default function Home() {
 
       // 3. Kirim array messages + newUserMessage ke server
       const response = await axios.post(`/api/chatBot/${params.categoryId}`, {
-        message: [...messages, newUserMessage], 
+        message: [...messages, newUserMessage],
       });
 
       // 4. Tambahkan bot response ke messages
@@ -44,12 +42,10 @@ export default function Home() {
         role: "assistant",
         content: response.data.message,
       };
-      
-      setMessages((prev) => [...prev, botReply]);
 
-    
+      setMessages((prev) => [...prev, botReply]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 

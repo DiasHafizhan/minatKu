@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ChatCompletionMessageParam } from "openai/src/resources.js";
 import { Prisma } from '@prisma/client';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const categoryResultwithItems = Prisma.validator<Prisma.CategoryResultInclude>()({
   items: true,
 });

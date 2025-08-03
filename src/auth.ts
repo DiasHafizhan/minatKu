@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials"
 import { prisma } from "./lib/prisma";
+import { AdapterUser } from "next-auth/adapters";
 
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -34,7 +35,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
 
     async session({ session, token }) {
-        session.user = token.user as any
+        session.user = token.user as AdapterUser & { id: number }
         return session;
       },
       async jwt({ token, user }) {

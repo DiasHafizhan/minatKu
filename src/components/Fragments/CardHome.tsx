@@ -1,4 +1,6 @@
-export default function CardHome(props: any) {
+import { ReactNode } from "react";
+
+export default function CardHome(props: {title: string, desc: string, children: ReactNode}) {
   const { title, desc, children } = props;
 
   return (

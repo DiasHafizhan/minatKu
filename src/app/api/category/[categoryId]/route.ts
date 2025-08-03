@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import {  NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(request: NextRequest, context: { params: Promise<{ categoryId: string }> }){
+export async function DELETE( request: NextRequest, context: { params: Promise<{ categoryId: string }> }){
   try {
     const {categoryId} = await context.params  
     await prisma.categoryResult.delete({
@@ -10,7 +10,7 @@ export async function DELETE(request: NextRequest, context: { params: Promise<{ 
       }
     })
     return NextResponse.json({'message': 'berhasil menghapus'})
-  } catch (error) {
+  } catch {
     return NextResponse.json({'message': 'Gagal menghapus'}, {
       status: 500
     })

@@ -7,7 +7,6 @@ import {
   PanelLeftClose,
   PanelRightOpen,
   Pencil,
-  PencilLine,
   Trash2,
   User2,
 } from "lucide-react";
@@ -23,7 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({
   children,
@@ -32,7 +31,6 @@ export default function DashboardLayout({
 }) {
   const [showSidebar, setShowSidebar] = useState(true);
   const pathname = usePathname();
-  const router = useRouter();
 
   const [category, setCategory] = useState<CategoryResult[]>([]);
   const { data: session } = useSession();
@@ -60,7 +58,6 @@ export default function DashboardLayout({
     };
     if (session) {
       fecthCategory();
-      console.log(category);
     }
   }, [session]);
 

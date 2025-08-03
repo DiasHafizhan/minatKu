@@ -1,12 +1,11 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer/index";
 import { usePathname } from "next/navigation";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],

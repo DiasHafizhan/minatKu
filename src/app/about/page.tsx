@@ -1,5 +1,6 @@
 import CardHome from "@/components/Fragments/CardHome";
-import { ChartPie, Cpu, GraduationCap, Shapes } from "lucide-react";
+import { ChartPie, Cpu, GraduationCap } from "lucide-react";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -17,7 +18,7 @@ export default function About() {
         </p>
       </div>
 
-      <img src="/about.png" alt="" className="w-full rounded-xl mb-24" />
+      <Image width={100} height={100} src="/about.png" alt="" className="w-full rounded-xl mb-24" />
 
       <div className="my-24 sm:my-32 bg-[#BFDDFC]/50 p-6 sm:p-10 rounded-xl">
         <div className="text-center">

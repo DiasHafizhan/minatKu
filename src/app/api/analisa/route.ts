@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { together } from "@/lib/together";
 import { RIASECResult } from "@/lib/type";
 import { NextRequest, NextResponse } from "next/server";
-import { json } from "stream/consumers";
 
 export async function POST(request: NextRequest) {
   try {
