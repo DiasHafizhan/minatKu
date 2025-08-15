@@ -1,3 +1,5 @@
+"use client";
+
 import CardHome from "@/components/Fragments/CardHome";
 import {
   Brain,
@@ -13,9 +15,11 @@ import {
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
+import { auth } from "@/auth";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <div className="w-full px-4 sm:px-8 md:px-20 bg-white text-[#141414]">
       {/* Section 1 */}
@@ -35,7 +39,7 @@ export default function Home() {
             Start for free
           </Link>
           <Link
-            href="/ai/quiz"
+            href={session ? `/ai/quiz` : `/login`}
             className="px-10 py-3 bg-[#096964] text-white transition duration-300 ease-in-out hover:bg-[#447f7c] rounded-lg text-center"
           >
             Try MinatKu
