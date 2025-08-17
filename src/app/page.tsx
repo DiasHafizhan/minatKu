@@ -15,11 +15,11 @@ import {
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
-import { auth } from "@/auth";
 import Link from "next/link";
+import { useSession } from "next-auth/react"
 
-export default async function Home() {
-  const session = await auth();
+export default function Home() {
+  const { data: session } = useSession()
   return (
     <div className="w-full px-4 sm:px-8 md:px-20 bg-white text-[#141414]">
       {/* Section 1 */}
